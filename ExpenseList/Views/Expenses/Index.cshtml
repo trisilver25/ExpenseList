@@ -4,47 +4,52 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Expenses</h1>
+<h1 style="text-align: center;">Expenses</h1>
 
-<h3>Total expenses $@ViewBag.TotalExpenses</h3>
+<h3 style="text-align: center;">Total expenses $@ViewBag.TotalExpenses</h3>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<div class="container" style="display: flex; flex-direction: column; align-items: flex-start;">
+    <p>
+
+    </p><a asp-action="Create" style="background-color: cornflowerblue;" class="btn btn-primary">Create New</a>
+    <table class="table">
+        <thead>
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @String.Format("{0:C}", item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Category)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Category)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @String.Format("{0:C}", item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" style="background-color: cornflowerblue;" class="btn btn-primary"
+                            asp-route-id="@item.ID">Edit</a>
+                        <a asp-action="Details" style="background-color: cornflowerblue;" class="btn btn-primary"
+                            asp-route-id="@item.ID">Details</a>
+                        <a asp-action="Delete" style="background-color: crimson;" class="btn btn-primary"
+                            asp-route-id="@item.ID">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

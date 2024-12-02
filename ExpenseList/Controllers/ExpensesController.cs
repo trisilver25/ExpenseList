@@ -52,6 +52,7 @@ namespace ExpenseList.Controllers
         // GET: Expenses/Create
         public IActionResult Create()
         {
+            ViewBag.Categories = new SelectList(new List<string> { "Food", "Transportation", "Housing", "Utilities", "Healthcare", "Insurance", "Savings", "Personal", "Entertainment", "Miscellaneous" });
             return View();
         }
 
@@ -84,6 +85,7 @@ namespace ExpenseList.Controllers
             {
                 return NotFound();
             }
+            ViewBag.Categories = new SelectList(new List<string> { "Food", "Transportation", "Housing", "Utilities", "Healthcare", "Insurance", "Savings", "Personal", "Entertainment", "Miscellaneous" }, expense.Category);
             return View(expense);
         }
 
