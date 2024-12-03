@@ -20,15 +20,36 @@ namespace ExpenseList.Controllers
         }
 
         // GET: Expenses
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string category)
         {
-            var allExpenses = _context.Expense.ToList();
+            var categories = await _context.Expense
+                .Select(expense => expense.Category)
+                .Distinct()
+                .ToListAsync();
 
-            var totalExpenses = allExpenses.Sum(expense => expense.Amount);
+            var expenses = from e in _context.Expense
+                           select e;
+
+            if (!String.IsNullOrEmpty(category))
+            {
+                expenses = expenses.Where(e => e.Category == category);
+            }
+
+            var totalExpenses = expenses.Sum(expense => expense.Amount);
 
             ViewBag.TotalExpenses = totalExpenses;
+            ViewBag.Categories = categories;
+            ViewBag.SelectedCategory = category;
 
-            return View(await _context.Expense.ToListAsync());
+            return View(await expenses.ToListAsync());
+
+            // var allExpenses = _context.Expense.ToList();
+
+            // var totalExpenses = allExpenses.Sum(expense => expense.Amount);
+
+            // ViewBag.TotalExpenses = totalExpenses;
+
+            // return View(await _context.Expense.ToListAsync());
         }
 
         // GET: Expenses/Details/5
