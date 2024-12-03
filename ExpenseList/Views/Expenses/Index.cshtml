@@ -4,15 +4,21 @@
     ViewData["Title"] = "Index";
 }
 
+<style>
+    .text-right {
+        text-align: right;
+    }
+</style>
+
 <h1 style="text-align: center;">Expenses</h1>
 
 <hr />
 
-<h3 style="text-align: center;">Total expenses $@String.Format("{0:F2}", ViewBag.TotalExpenses)</h3>
+<h3 style="text-align: center;">Total $@String.Format("{0:F2}", ViewBag.TotalExpenses)</h3>
 
 <div class="container" style="display: flex; flex-direction: column; align-items: flex-start;">
-    <form method="get" asp-action="Index">
-        <div class="form-group">
+    <form method="get" asp-action="Index" style="display: flex; align-items: center;">
+        <div class="form-group" style="margin-right: 10px;">
             <label for="Category">Filter by Category</label>
             <select id="Category" name="category" class="form-control">
                 <option value="">All</option>
@@ -27,7 +33,7 @@
         <button type="submit" class="btn btn-primary">Filter</button>
     </form>
 
-    <a asp-action="Create" style="background-color: cornflowerblue;" class="btn btn-primary">Create New</a>
+
     <table class="table">
         <thead>
             <tr>
@@ -56,7 +62,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Category)
                     </td>
-                    <td>
+                    <td class="text-right">
                         <a asp-action="Edit" style="background-color: cornflowerblue;" class="btn btn-primary"
                             asp-route-id="@item.ID">Edit</a>
                         <a asp-action="Details" style="background-color: cornflowerblue;" class="btn btn-primary"
@@ -68,4 +74,8 @@
             }
         </tbody>
     </table>
+</div>
+
+<div class="text-center">
+    <a asp-action="Create" style="background-color: cornflowerblue;" class="btn btn-primary">Create New</a>
 </div>
